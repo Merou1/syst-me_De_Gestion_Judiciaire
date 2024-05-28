@@ -84,14 +84,14 @@ class Dossier
         return $this;
     }
 
-    public function getDocuments(): string
+    public function getDocuments(): ?array
     {
-        return implode(', ', $this->documents);
+        return $this->documents;
     }
 
-    public function setDocuments(string $documents): self
+    public function setDocuments(?array $documents): self
     {
-        $this->documents = array_filter(array_map('trim', explode('-', $documents)));
+        $this->documents = $documents;
 
         return $this;
     }

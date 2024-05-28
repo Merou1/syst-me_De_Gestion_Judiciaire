@@ -8,6 +8,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -23,8 +24,11 @@ class DossierType extends AbstractType
                 'widget' => 'single_text',
                 'attr' => ['class' => 'form-control'],
             ])
-            ->add('documents', TextType::class, [
-                'attr' => ['class' => 'form-control'],
+            ->add('documents', FileType::class, [
+                'label' => 'Documents (PDF files)',
+                'mapped' => false,
+                'required' => false,
+                'multiple' => true,
             ])
             ->add('partiesImpliquees', TextType::class, [
                 'attr' => ['class' => 'form-control'],

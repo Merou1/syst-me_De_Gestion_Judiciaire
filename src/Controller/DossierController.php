@@ -11,6 +11,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\String\Slugger\SluggerInterface;
+
+
 
 #[Route('/dossier')]
 class DossierController extends AbstractController
@@ -23,14 +27,36 @@ class DossierController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_dossier_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/dossier/new', name: 'app_dossier_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
         $dossier = new Dossier();
         $form = $this->createForm(DossierType::class, $dossier);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $documents = $form->get('documents')->getData();
+
+            if ($documents) {
+                $documentNames = [];
+                foreach ($documents as $document) {
+                    $originalFilename = pathinfo($document->getClientOriginalName(), PATHINFO_FILENAME);
+                    $safeFilename = $slugger->slug($originalFilename);
+                    $newFilename = $safeFilename . '-' . uniqid() . '.' . $document->guessExtension();
+
+                    try {
+                        $document->move(
+                            $this->getParameter('documents_directory'),
+                            $newFilename
+                        );
+                        $documentNames[] = $newFilename;
+                    } catch (FileException $e) {
+                        // Handle exception if something happens during file upload
+                    }
+                }
+                $dossier->setDocuments($documentNames);
+            }
+
             $entityManager->persist($dossier);
             $entityManager->flush();
 
@@ -38,11 +64,9 @@ class DossierController extends AbstractController
         }
 
         return $this->render('dossier/new.html.twig', [
-            'dossier' => $dossier,
             'form' => $form->createView(),
         ]);
     }
-
     #[Route('/{id}', name: 'app_dossier_show', methods: ['GET'])]
     public function show(Dossier $dossier): Response
     {
