@@ -119,7 +119,7 @@ public function signin(Request $request, EntityManagerInterface $entityManager):
     // Find user by email
     $user = $entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
 
-    if (!$user || $user->getPassword() !== $password) {
+    if (!$user ||  !password_verify($password, $user->getPassword())) {
         $this->addFlash('error', 'Invalid email or password.');
         return $this->redirectToRoute('signin_signup');
     }

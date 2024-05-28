@@ -3,6 +3,17 @@
 {% block title %}Preuves Dossier{% endblock %}
 
 {% block body %}
+<style>
+.back{
+            color:#aa80ff;
+        }
+         .back:hover{
+            color:#884dff;
+            text-decoration:underline;
+            background-color:#eee6ff;
+
+        }
+</style>
     <h1>Preuves Dossier</h1>
 
     <table class="table">
@@ -13,20 +24,17 @@
             </tr>
             <tr>
                 <th>Titre</th>
-                <td>{{ preuvesDossier.titre }}</td>
+                <td>{{ preuvesDossier.dossier.titre }}</td>
             </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ preuvesDossier.description }}</td>
-            </tr>
+          
             <tr>
                 <th>Dossier</th>
-                <td>{{ preuvesDossier.dossier.numeroDossier }}</td>
+                <td>{{ preuvesDossier.dossier.id }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_preuves_dossier_index') }}">back to list</a>
+    <a class="back" href="{{ path('app_preuves_dossier_index') }}">back to list</a>
 
     {{ include('preuves_dossier/_delete_form.html.twig') }}
 {% endblock %}

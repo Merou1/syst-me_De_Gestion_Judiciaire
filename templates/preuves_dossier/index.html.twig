@@ -3,6 +3,17 @@
 {% block title %}Preuves Dossier index{% endblock %}
 
 {% block body %}
+<style>
+.back{
+            color:#aa80ff;
+        }
+         .back:hover{
+            color:#884dff;
+            text-decoration:underline;
+            background-color:#eee6ff;
+
+        }
+</style>
     <h1>Preuves Dossier index</h1>
 
     <table class="table">
@@ -21,8 +32,8 @@
                 <td>{{ preuvesDossier.preuves }}</td>
                 <td>{{ preuvesDossier.dossier.titre }}</td>
                 <td>
-                    <a href="{{ path('app_preuves_dossier_show', {'id': preuvesDossier.id}) }}">show</a>
-                    <a href="{{ path('app_preuves_dossier_edit', {'id': preuvesDossier.id}) }}">edit</a>
+                    <a class="back" href="{{ path('app_preuves_dossier_show', {'id': preuvesDossier.id}) }}">show</a>
+                    <a class="back" href="{{ path('app_preuves_dossier_edit', {'id': preuvesDossier.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -33,5 +44,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_preuves_dossier_new') }}">Create new</a>
+    <a class="back" href="{{ path('app_preuves_dossier_new') }}">Create new</a>
 {% endblock %}
