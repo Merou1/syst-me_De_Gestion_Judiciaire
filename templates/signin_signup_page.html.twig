@@ -12,11 +12,21 @@
             <div class="alert alert-danger" role="alert">
                 {{ flash_message }}
             </div>
+
         {% elseif flash_message == 'All fields are required.' %}
             <div class="alert alert-danger" role="alert">
                 {{ flash_message }}
             </div>
+                {% elseif flash_message == 'A user with this email already exists.' %}
+            <div class="alert alert-danger" role="alert">
+                {{ flash_message }}
+            </div>
+            {% elseif flash_message == 'Invalid email or password.' %}
+            <div class="alert alert-danger" role="alert">
+                {{ flash_message }}
+            </div>
         {% endif %}
+
     {% endfor %}
 
     <div class="container" id="container">
@@ -32,17 +42,20 @@
                 <input id="email" name="email" type="email" placeholder="Email" />
                 <input id="password" name="password" type="password" placeholder="Password" />
                 <input id="confirmpassword" name="confirmpassword" type="password" placeholder="Confirm Password" />
+                <input type="hidden" name="action" value="signup">
                 <button>Sign Up</button>
             </form>
         </div>
         <div class="form-container sign-in-container">
-            <form action="#">
+            <form method="post" action="{{ path('signin') }}">
                 <h1>Sign in</h1>
-                <input type="email" placeholder="Email" />
-                <input type="password" placeholder="Password" />
+                <input id="email" name="email" type="email" placeholder="Email" />
+                <input id="password" name="password" type="password" placeholder="Password" />
                 <a href="#">Forgot your password?</a>
+                <input type="hidden" name="action1" value="signin">
                 <button>Sign In</button>
             </form>
+
         </div>
         <div class="overlay-container">
             <div class="overlay">

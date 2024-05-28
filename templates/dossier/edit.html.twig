@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Dossier{% endblock %}
+
+{% block body %}
+    <h1>Edit Dossier</h1>
+
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+        <div class="form-group">
+            {{ form_label(form.titre) }}
+            {{ form_widget(form.titre, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.titre) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.dateDepot) }}
+            {{ form_widget(form.dateDepot, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.dateDepot) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.documents) }}
+            {{ form_widget(form.documents, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.documents) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.partiesImpliquees) }}
+            {{ form_widget(form.partiesImpliquees, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.partiesImpliquees) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.lawyers) }}
+            {{ form_widget(form.lawyers, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.lawyers) }}
+        </div>
+        <button class="btn btn-primary">Save</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('app_dossier_index') }}">Back to list</a>
+{% endblock %}

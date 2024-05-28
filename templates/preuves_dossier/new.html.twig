@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create Dossier{% endblock %}
+
+{% block body %}
+    <style>
+ 
+        .form-container {
+         height:50%;
+         margin-top:10%;
+         box-shadow: 5px 5px 5px 5px #eee6ff;
+         
+        }
+        .form-group {
+                 margin-top:20%;
+
+            display: flex;
+            align-items: center;
+            justify-content:center;
+            margin-bottom: 15px;
+        }
+        .form-group2{
+            margin-top:15%;
+        }
+        .form-group label {
+            margin-right: 100px;
+        }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #4835d4;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+            margin-top:40%
+        }
+        .btn:hover {
+            background-color: #9966ff;
+        }
+        .back{
+            color:#aa80ff;
+        }
+         .back:hover{
+            color:#884dff;
+            text-decoration:underline;
+        }
+    </style>
+
+    <h1>Create new Dossier</h1>
+
+    <div class="form-container">
+        {{ form_start(form) }}
+            <div class="form-group">
+                {{ form_label(form.preuves) }}
+                {{ form_widget(form.preuves) }}
+            </div>
+            <div class="form-group2">
+                {{ form_label(form.dossier) }}
+                {{ form_widget(form.dossier) }}
+            </div>
+            <button class="btn">Save</button>
+        {{ form_end(form) }}
+    </div>
+
+    <a class="back" href="{{ path('app_dossier_index') }}">Back to list</a>
+{% endblock %}

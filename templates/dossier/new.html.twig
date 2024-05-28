@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create Dossier{% endblock %}
+
+{% block body %}
+<style>
+.body{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+ .form_container {
+         box-shadow: 5px 5px 5px 5px #eee6ff;
+         margin-left:10%; 
+         display:flex;
+         flex-direction:column;
+         justify-content:center;
+         align-items:center;  
+         
+        }
+        .back{
+            color:#aa80ff;
+        }
+         .back:hover{
+            color:#884dff;
+            text-decoration:underline;
+            background-color:#eee6ff;
+
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #4835d4;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #9966ff;
+        }
+</style>
+
+
+<div class="body">
+
+    <h1>Create new Dossier</h1>
+<div class="form_container">
+        <a class="back" href="{{ path('app_dossier_index') }}">Back to list</a>
+
+
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+        <div class="form-group">
+            {{ form_label(form.titre) }}
+            {{ form_widget(form.titre, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.titre) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.dateDepot) }}
+            {{ form_widget(form.dateDepot, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.dateDepot) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.documents) }}
+            {{ form_widget(form.documents, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.documents) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.partiesImpliquees) }}
+            {{ form_widget(form.partiesImpliquees, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.partiesImpliquees) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.lawyers) }}
+            {{ form_widget(form.lawyers, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.lawyers) }}
+        </div>
+        <button class="btn btn-primary">Save</button>
+    {{ form_end(form) }}
+
+            </div>
+
+
+       </div>
+{% endblock %}
