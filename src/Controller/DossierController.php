@@ -35,17 +35,17 @@ class DossierController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $documents = $form->get('documents')->getData();
+            $documentFiles = $form->get('documents')->getData();
 
-            if ($documents) {
+            if ($documentFiles) {
                 $documentNames = [];
-                foreach ($documents as $document) {
-                    $originalFilename = pathinfo($document->getClientOriginalName(), PATHINFO_FILENAME);
+                foreach ($documentFiles as $documentFile) {
+                    $originalFilename = pathinfo($documentFile->getClientOriginalName(), PATHINFO_FILENAME);
                     $safeFilename = $slugger->slug($originalFilename);
-                    $newFilename = $safeFilename . '-' . uniqid() . '.' . $document->guessExtension();
+                    $newFilename = $safeFilename . '-' . uniqid() . '.' . $documentFile->guessExtension();
 
                     try {
-                        $document->move(
+                        $documentFile->move(
                             $this->getParameter('documents_directory'),
                             $newFilename
                         );

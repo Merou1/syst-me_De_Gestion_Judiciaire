@@ -1,3 +1,23 @@
+ <style>
+  .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #4835d4;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+            margin-top:40%
+        }
+        .btn:hover {
+            background-color: #9966ff;
+        }
+        .f{
+            background-color:transparent;
+        }
+</style>
+
 <form method="post" action="{{ path('app_preuves_dossier_delete', {'id': preuvesDossier.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ preuvesDossier.id) }}">
     <button class="btn">Delete</button>
